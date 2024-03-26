@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "../axios";
+import Swal from "sweetalert2";
 
 export default function ViewAll() {
   const router = useRouter();
 
   const [questions, setQuestions] = useState({});
   const [isLoading, setIsloading] = useState(true);
+  const [num, setNum] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,11 +23,43 @@ export default function ViewAll() {
     };
 
     fetchData();
-  }, []);
+  }, [num]);
 
   const handleEdit = (questionId) => {
     localStorage.setItem(questionId, JSON.stringify(questions[questionId]));
     router.push(`/dashboard/edit/${questionId}`);
+  };
+
+  const confirmDelete = (questionId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          const url = `questions/${questionId}`;
+          const response = await axiosInstance.delete(url);
+          setNum(num + 1);
+        } catch (error) {
+          Swal.showValidationMessage(`
+                Request failed: ${error}
+              `);
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Question  deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -67,8 +101,9 @@ export default function ViewAll() {
                   </button>
                   <button
                     type="button"
-                    className="w-full sm:w-auto py-2 px-3 bg-red-600 hover:bg-indigo-700 disabled:bg-indigo-300 dark:disabled:bg-indigo-800 text-white dark:disabled:text-indigo-400 text-sm font-semibold rounded-md shadow focus:outline-none cursor-progress"
+                    className="w-full sm:w-auto py-2 px-3 bg-red-600 hover:bg-indigo-700 disabled:bg-indigo-300 dark:disabled:bg-indigo-800 text-white dark:disabled:text-indigo-400 text-sm font-semibold rounded-md shadow focus:outline-none cursor-pointer"
                     tabIndex="-1"
+                    onClick={() => confirmDelete(questionId)}
                   >
                     Delete
                   </button>
