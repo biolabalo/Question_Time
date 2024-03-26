@@ -1,10 +1,27 @@
 // home.test.jsx
 
-import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { useRouter } from 'next/router';
 import Home from '../src/app/page';
 
+
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
+}));
+
+describe('Home Page', () => {
+
+  useRouter.mockImplementation(() => ({
+    route: '/',
+    pathname: '/',
+    query: '',
+    asPath: '',
+    push: jest.fn(),
+}));
+
 test('renders the home page with initial state', () => {
+  
+
   const { getByText, getByLabelText } = render(<Home />);
 
   // Check title
@@ -23,3 +40,5 @@ test('renders the home page with initial state', () => {
   // No error message
   expect(screen.queryByText(/Please enter a valid email address./i)).toBeNull();
 });
+
+})
