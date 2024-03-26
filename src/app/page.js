@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import axios from 'axios'
+import { axiosInstance } from './axios'
 
 
 const questionTime = 'questionTime'
@@ -42,10 +42,9 @@ export default function Home() {
 
 
     try {
-      const response = await axios.post("https://qt.organogram.app/token", {
+      const response = await axiosInstance.post("token", {
         email,
       });
-      console.log(response.data)
       const { token } = response.data;
       localStorage.setItem(questionTime, token);
      

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import { axiosInstance } from '../../axios'
+
 
 export default function CreateQuestion() {
   const [question, setQuestion] = useState("");
@@ -44,17 +45,12 @@ export default function CreateQuestion() {
     }
     setIsloading(true);
     try {
-       await axios.post(
-        "https://qt.organogram.app/questions",
+       await axiosInstance.post(
+        "questions",
         {
           question,
           options: validOptions,
         },
-        {
-          headers: {
-            Token: localStorage.getItem("questionTime"),
-          },
-        }
       );
       setIsloading(false);
       // Redirect to the questions page after successfully creating the question

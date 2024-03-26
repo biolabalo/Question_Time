@@ -1,27 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { axiosInstance } from '../axios'
+
 
 export default function ViewAll() {
-  const questionTime = "questionTime";
   const router = useRouter();
 
   const [questions, setQuestions] = useState({});
   const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem(questionTime);
-    if (typeof window !== "undefined") {
+  
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            "https://qt.organogram.app/questions",
-            {
-              headers: {
-                Token: token,
-              },
-            }
+          const response = await axiosInstance.get(
+            "questions",
           );
           setQuestions(response.data ?? {});
           setIsloading(false);
@@ -30,10 +24,7 @@ export default function ViewAll() {
         }
       };
 
-      if (token) {
-        fetchData();
-      }
-    }
+      fetchData();
   }, []);
 
   const handleEdit = (questionId) => {
