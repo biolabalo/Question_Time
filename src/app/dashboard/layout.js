@@ -1,9 +1,19 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Layout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const tokenExists = localStorage.getItem("questionTime");
+      if (!tokenExists) {
+        router.push("/");
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -57,7 +67,7 @@ export default function Layout({ children }) {
         </div>
       </header>
       <section className="text-gray-700 body-font bg-white h-full">
-        <div className="container mx-auto flex px-5 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex p-16 md:flex-row flex-col items-center">
           {children}
         </div>
       </section>

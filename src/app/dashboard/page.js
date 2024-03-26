@@ -56,7 +56,7 @@ export default function ViewAll() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 items-center justify-around">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 items-center justify-evenly">
                   <button
                     type="button"
                     className="w-full sm:w-auto py-2 px-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 dark:disabled:bg-indigo-800 text-white dark:disabled:text-indigo-400 text-sm font-semibold rounded-md shadow focus:outline-none cursor-pointer"
@@ -67,7 +67,7 @@ export default function ViewAll() {
                   </button>
                   <button
                     type="button"
-                    className="w-full sm:w-auto py-2 px-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 dark:disabled:bg-indigo-800 text-white dark:disabled:text-indigo-400 text-sm font-semibold rounded-md shadow focus:outline-none cursor-progress"
+                    className="w-full sm:w-auto py-2 px-3 bg-red-600 hover:bg-indigo-700 disabled:bg-indigo-300 dark:disabled:bg-indigo-800 text-white dark:disabled:text-indigo-400 text-sm font-semibold rounded-md shadow focus:outline-none cursor-progress"
                     tabIndex="-1"
                   >
                     Delete

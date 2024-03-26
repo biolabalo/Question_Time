@@ -60,7 +60,7 @@ export default function CreateQuestion({ params }) {
     }
     setIsloading(true);
     try {
-      await axiosInstance.put("https://qt.organogram.app/questions", {
+      await axiosInstance.put(`questions/${params?.id}`, {
         question,
         options: validOptions,
       });
@@ -113,14 +113,14 @@ export default function CreateQuestion({ params }) {
           <button
             type="button"
             onClick={handleAddOption}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mr-4"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 mr-4"
           >
             Add Option
           </button>
           <button
             onClick={handleSubmit}
             disabled={isLoading}
-            className="bg-green-500 text-white px-4 py-2 rounded-md"
+            className="bg-green-500 text-white px-4 py-2 rounded-md mb-4"
           >
             {isLoading ? "loading..." : " Update Question"}
           </button>
