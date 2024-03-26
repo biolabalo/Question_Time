@@ -1,10 +1,9 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { axiosInstance } from '../api'
+import { axiosInstance, questionTime } from '../api'
+import {validateEmail} from '../util'
 
-
-const questionTime = 'questionTime'
 export default function Home() {
 
   const [email, setEmail] = useState('');
@@ -23,10 +22,6 @@ export default function Home() {
     }
   }, []);
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

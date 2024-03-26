@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const questionTime = "questionTime";
+export const questionTime = "questionTime";
 
 export const axiosInstance = axios.create({
 	baseURL: 'https://qt.organogram.app/', // Replace with your actual base URL

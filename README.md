@@ -66,8 +66,6 @@ The project directory structure using Next.js App Router src structure:
 * /tests: Contains test files for unit and integration testing.
 
 ## Testing
-Unit and integration tests are implemented using the Jest testing framework. To run the tests, use the following command:
+Unit and integration tests are implemented using the Jest and React Testing Library. To run the tests, use the following command:
 
-bash
-Copy code
 npm test

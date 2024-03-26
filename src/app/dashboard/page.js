@@ -42,7 +42,7 @@ export default function ViewAll() {
       preConfirm: async () => {
         try {
           const url = `questions/${questionId}`;
-          const response = await axiosInstance.delete(url);
+          await axiosInstance.delete(url);
           setNum(num + 1);
         } catch (error) {
           Swal.showValidationMessage(`
