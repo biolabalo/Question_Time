@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { axiosInstance } from './axios'
+import { axiosInstance } from '../api'
 
 
 const questionTime = 'questionTime'

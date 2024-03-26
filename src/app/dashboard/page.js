@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { axiosInstance } from "../axios";
+import { axiosInstance } from "../../api";
 import Swal from "sweetalert2";
 
 export default function ViewAll() {

@@ -54,11 +54,20 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
-## Learn More
-
-
+## Deployment
 
 - [Hosted App]( https://question-time-rho.vercel.app/) - Click the link to view the hosted app.
 
 
-## Deploy on Vercel
+## Project Structure
+The project directory structure using Next.js App Router src structure:
+
+* /src/app: Contains Next.js page.
+* /tests: Contains test files for unit and integration testing.
+
+## Testing
+Unit and integration tests are implemented using the Jest testing framework. To run the tests, use the following command:
+
+bash
+Copy code
+npm test

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { axiosInstance } from '../../axios'
+import { axiosInstance } from '../../../api'
 
 
 export default function CreateQuestion() {
