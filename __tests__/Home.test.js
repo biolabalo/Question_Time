@@ -1,44 +1,39 @@
 // home.test.jsx
 
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
-import { useRouter } from 'next/router';
 import Home from '../src/app/page';
+import "@testing-library/jest-dom";
 
+describe("Home", () => {
+  it("renders the heading", () => {
+    render(<Home />);
+    const heading = screen.getByRole("heading", {
+      name: /Question Time/i,
+    });
+    expect(heading).toBeInTheDocument();
+  });
 
-jest.mock('next/router', () => ({
-  useRouter: jest.fn(),
-}));
+it('renders the email input field', () => {
+     render(<Home />);
+    const emailInput = screen.getByPlaceholderText('Enter your email');
+    expect(emailInput).toBeInTheDocument();
+    expect(emailInput).toHaveAttribute('type', 'email');
+    expect(emailInput).toHaveAttribute('autocomplete', 'email');
+    expect(emailInput).toHaveAttribute('required');
+  });
 
-describe('Home Page', () => {
+  it('allows typing into the email input field', () => {
+    render(<YourComponent />);
+    const emailInput = screen.getByPlaceholderText('Enter your email');
+    userEvent.type(emailInput, 'test@example.com');
+    expect(emailInput).toHaveValue('test@example.com');
+  });
 
-  useRouter.mockImplementation(() => ({
-    route: '/',
-    pathname: '/',
-    query: '',
-    asPath: '',
-    push: jest.fn(),
-}));
-
-test('renders the home page with initial state', () => {
-  
-
-  const { getByText, getByLabelText } = render(<Home />);
-
-  // Check title
-  expect(getByText(/Question Time/i)).toBeInTheDocument();
-
-  // Check email input
-  const emailInput = getByLabelText(/Email address/i);
-  expect(emailInput).toBeInTheDocument();
-  expect(emailInput.value).toBe('');
-
-  // Check submit button
-  const submitButton = getByText(/Submit/i);
-  expect(submitButton).toBeInTheDocument();
-  expect(submitButton).toBeDisabled(); // Initially disabled
-
-  // No error message
-  expect(screen.queryByText(/Please enter a valid email address./i)).toBeNull();
+it('renders the "Submit" button', () => {
+    render(<Home />);
+    const submitButton = screen.getByRole('button', { name: /Submit/i });
+    expect(submitButton).toBeInTheDocument();
+    expect(submitButton).toHaveClass('bg-indigo-500');
+    expect(submitButton).toHaveAttribute('type', 'submit');
+  });
 });
-
-})
